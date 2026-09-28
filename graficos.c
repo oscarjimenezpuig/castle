@@ -7,6 +7,13 @@ sprite_t sheroe[3];
 
 palette_t ppared,pescalera,pespada,pheroe;
 
+static void pal_def(palette_t p,color_t a,color_t b,color_t c,color_t d) {
+    p[0]=a;
+    p[1]=b;
+    p[2]=c;
+    p[3]=d;
+}
+
 static void spared_def() {
     char* d1[]={    "00000000",
                     "00000000",
@@ -48,8 +55,9 @@ static void spared_def() {
     spared[1]=spr_grd(8,d2);
     spared[2]=spr_grd(8,d3);
     spared[3]=spr_grd(8,d4);
-    ppared[0]=col_new(0,0,200);
-    ppared[1]=col_new(0,0,125);
+    pal_def(ppared[0],col_new(0,0,255),col_new(0,0,200),BLACK,BLACK);
+    pal_def(ppared[1],col_new(0,0,130),col_new(0,0,65),BLACK,BLACK);
+    pal_def(ppared[2],col_new(200,0,0),col_new(125,0,0),BLACK,BLACK);
 }
 
 static void sescalera_def() {

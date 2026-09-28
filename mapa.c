@@ -57,6 +57,14 @@ static void hab_def() {
 void cst_ini() {
     hab_def();
 }
+
+static void rom_sal_drw(uc_t c,uc_t r) {
+    uc_t sal=cst_get(c,r);
+}
+
+void cst_drw(uc_t c,uc_t r) {
+}
+
             
 
 

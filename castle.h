@@ -33,7 +33,7 @@ extern sprite_t sescalera;
 extern sprite_t sespada[2];
 extern sprite_t sheroe[3];
 
-extern palette_t ppared;
+extern palette_t ppared[3];
 extern palette_t pescalera;
 extern palette_t pespada;
 extern palette_t pheroe;
@@ -54,3 +54,5 @@ room_t* cst_get(uc_t c,uc_t r);
 void cst_ini();
 //inicia el mapa del castillo
 
+void cst_drw(uc_t c,uc_t r);
+//dibuja la habitacion con las coordenadas dadas
