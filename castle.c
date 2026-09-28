@@ -14,11 +14,6 @@ static void castle_end() {
 #include <stdio.h>
 
 void prueba_sprites() { //dbg
-    spr_drw(spared[0],ppared,0,PANH-(16*PIXDIM),PIXDIM);
-    for(int k=1;k<64;k++) {
-        spr_drw(spared[1],ppared,k*8*PIXDIM,PANH-(16*PIXDIM),PIXDIM);
-    }
-    spr_drw(spared[2],ppared,0,PANH-(24*PIXDIM),PIXDIM);
     spr_drw(sescalera,pescalera,200,200,PIXDIM);
     spr_drw(sespada[0],pespada,300,200,PIXDIM);
     spr_drw(sheroe[2],pheroe,400,200,PIXDIM);
@@ -38,7 +33,8 @@ void prueba_mapa() {
 
 int main() {
     castle_init();
-    prueba_sprites();//dbg
+    cst_drw(9,3);
+    scr_fls();
     prueba_mapa(); //dbg
     getchar();
     castle_end();

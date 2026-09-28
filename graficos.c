@@ -5,7 +5,8 @@ sprite_t sescalera;
 sprite_t sespada[2];
 sprite_t sheroe[3];
 
-palette_t ppared,pescalera,pespada,pheroe;
+palette_t ppared[3];
+palette_t pescalera,pespada,pheroe;
 
 static void pal_def(palette_t p,color_t a,color_t b,color_t c,color_t d) {
     p[0]=a;
@@ -47,9 +48,9 @@ static void spared_def() {
                     "11111111",
                     "11111111",
                     "11111111",
-                    "11111111",
-                    "11111111",
-                    "11111111"
+                    "00000000",
+                    "00000000",
+                    "00000000"
     };
     spared[0]=spr_grd(8,d1);
     spared[1]=spr_grd(8,d2);
@@ -132,16 +133,9 @@ static void mspd(int sps,sprite_t* sp) {
     for(int k=0;k<sps;k++) spr_del(sp+k);
 }
 
-#define FOR(L) for(int k=0;k<(L);k++)
-
 void graf_end() {
     mspd(4,spared);
     spr_del(&sescalera);
     mspd(2,sespada);
     mspd(3,sheroe);
 }
-
-#undef FOR
-
-
-
