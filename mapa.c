@@ -58,12 +58,10 @@ void cst_ini() {
     hab_def();
 }
 
-#include <stdio.h> //dbg
-
 static void rom_sal_drw(room_t r,uc_t deep) {
     const uc_t SOTANO=5;
     const uc_t SUBSUELO=8;
-    const uc_t DSP=8*PIXDIM;
+    const uc_t DSP=SPRD;
     uc_t sal=r.sal;
     palette_t* pal=(deep>=SUBSUELO)?ppared+2:(deep>=SOTANO)?ppared+1:ppared;
     //techo Y suelo
@@ -74,12 +72,10 @@ static void rom_sal_drw(room_t r,uc_t deep) {
        if(col==0) spar=0;
        spr_drw(spared[spar],*pal,col,7*DSP,PIXDIM);
        col+=DSP;
-       printf("techo=%i suelo=%i\n",DSP,PANH-2*DSP);//dbg
     }
     //paredes
     int fil=2*DSP;
     while(fil<PANH-3*DSP) {
-        printf("pared=%i\n",fil);//dbg
         if((sal & 4)==0) spr_drw(spared[2],*pal,0,fil,PIXDIM);
         if((sal & 2)==0) spr_drw(spared[2],*pal,PANW-DSP,fil,PIXDIM);
         fil+=DSP;

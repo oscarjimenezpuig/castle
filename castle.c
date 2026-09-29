@@ -33,7 +33,7 @@ void prueba_mapa() {
 
 int main() {
     castle_init();
-    cst_drw(9,3);
+    cst_drw(6,7);
     scr_fls();
     prueba_mapa(); //dbg
     getchar();
