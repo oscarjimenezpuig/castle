@@ -3,7 +3,7 @@
 # ============================================================
 
 TARGET = castle
-SRCS   = sprite.c graficos.c mapa.c movil.c castle.c
+SRCS   = sprite.c graficos.c mapa.c movil.c jugador.c castle.c
 
 # Archivo que almacena el tipo de compilación
 # N = normal
