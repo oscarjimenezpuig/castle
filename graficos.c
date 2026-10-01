@@ -41,7 +41,7 @@ static void spared_def() {
                     "00000000",
                     "00000000",
                     "00000000",
-                    "00000000"
+                    "22222222"
     };
     char* d4[]={    "11111111",
                     "11111111",
@@ -50,15 +50,16 @@ static void spared_def() {
                     "11111111",
                     "00000000",
                     "00000000",
-                    "00000000"
+                    "22222222"
     };
     spared[0]=spr_grd(8,d1);
     spared[1]=spr_grd(8,d2);
     spared[2]=spr_grd(8,d3);
     spared[3]=spr_grd(8,d4);
-    pal_def(ppared[0],col_new(0,0,255),col_new(0,0,200),BLACK,BLACK);
-    pal_def(ppared[1],col_new(0,0,130),col_new(0,0,65),BLACK,BLACK);
-    pal_def(ppared[2],col_new(200,0,0),col_new(125,0,0),BLACK,BLACK);
+    color_t darkgrey=col_new(10,10,10);
+    pal_def(ppared[0],col_new(0,0,255),col_new(0,0,200),darkgrey,BLACK);
+    pal_def(ppared[1],col_new(0,0,130),col_new(0,0,65),darkgrey,BLACK);
+    pal_def(ppared[2],col_new(200,0,0),col_new(125,0,0),darkgrey,BLACK);
 }
 
 static void sescalera_def() {

@@ -4,6 +4,7 @@ static void castle_init() {
     scr_ini(PANW,PANH);
     graf_ini();
     cst_ini();
+    jug_ini();
 };
 
 static void castle_end() {
@@ -33,10 +34,15 @@ void prueba_mapa() {
 
 int main() {
     castle_init();
-    cst_drw(6,7);
-    scr_fls();
-    prueba_mapa(); //dbg
-    getchar();
+    cst_fix_drw(jugador.px,jugador.py);
+    while(!quit) {
+        cst_nfix_drw(jugador.px,jugador.py);
+        mov_drw(jugador);
+        scr_fls();
+        pause(0.01);
+        mov_era(jugador);
+        jug_act();
+    }
     castle_end();
     return 0;
 }

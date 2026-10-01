@@ -58,46 +58,45 @@ void cst_ini() {
     hab_def();
 }
 
-static void rom_sal_drw(room_t r,uc_t deep) {
+void cst_fix_drw(uc_t cl,uc_t rw) {
     const uc_t SOTANO=5;
     const uc_t SUBSUELO=8;
-    const uc_t DSP=SPRD;
-    uc_t sal=r.sal;
+    room_t* r=cst_get(cl,rw);
+    uc_t deep=rw;
+    uc_t sal=r->sal;
     palette_t* pal=(deep>=SUBSUELO)?ppared+2:(deep>=SOTANO)?ppared+1:ppared;
     //techo Y suelo
     int col=0;
     while(col<PANW) {
-       spr_drw(spared[3],*pal,col,DSP,PIXDIM);
+       spr_drw(spared[3],*pal,col,SPRD,PIXDIM);
        uc_t spar=1;
        if(col==0) spar=0;
-       spr_drw(spared[spar],*pal,col,7*DSP,PIXDIM);
-       col+=DSP;
+       spr_drw(spared[spar],*pal,col,7*SPRD,PIXDIM);
+       col+=SPRD;
     }
     //paredes
-    int fil=2*DSP;
-    while(fil<PANH-3*DSP) {
+    int fil=2*SPRD;
+    while(fil<PANH-3*SPRD) {
         if((sal & 4)==0) spr_drw(spared[2],*pal,0,fil,PIXDIM);
-        if((sal & 2)==0) spr_drw(spared[2],*pal,PANW-DSP,fil,PIXDIM);
-        fil+=DSP;
+        if((sal & 2)==0) spr_drw(spared[2],*pal,PANW-SPRD,fil,PIXDIM);
+        fil+=SPRD;
     }
+}
+
+void cst_nfix_drw(uc_t c,uc_t r) {
+    uc_t sal=cst_get(c,r)->sal;
     //escalera superior
     if(sal & 8) {
-        spr_era(spared[3],4*DSP,DSP,PIXDIM);
-        for(int fil=DSP;fil<=PANH-2*DSP;fil+=DSP) spr_drw(sescalera,pescalera,4*DSP,fil,PIXDIM);
+        spr_era(spared[3],4*SPRD,SPRD,PIXDIM);
+        for(int fil=SPRD;fil<=6*SPRD;fil+=SPRD) spr_drw(sescalera,pescalera,4*SPRD,fil,PIXDIM);
     }
     //escalera inferior
     if(sal & 1) {
-        spr_era(spared[1],4*DSP,7*DSP,PIXDIM);
-        for(int fil=6*DSP;fil<=7*DSP;fil+=DSP) spr_drw(sescalera,pescalera,4*DSP,fil,PIXDIM);
+        spr_era(spared[1],4*SPRD,7*SPRD,PIXDIM);
+        for(int fil=6*SPRD;fil<=7*SPRD;fil+=SPRD) spr_drw(sescalera,pescalera,4*SPRD,fil,PIXDIM);
     }
 }
 
-void cst_drw(uc_t c,uc_t r) {
-    room_t* room=cst_get(c,r);
-    rom_sal_drw(*room,r);
-}
-
-            
 
 
                         

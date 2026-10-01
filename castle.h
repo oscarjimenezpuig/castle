@@ -17,7 +17,8 @@
 #define CASH 10
 #define CASDIM (CASW*CASH)
 
-#define SPRW 
+#define PJXI 0
+#define PJYI 5
 
 // Tipos
 
@@ -36,8 +37,9 @@ typedef struct {
     uc_t pdi; //dimension del pixel
     int x,y; //posicion en la pantalla
     int hjm; //altura donde llegaba el salto
-    int vy; //velocidad de subida (solo en caso de salto)
+    int vjy; //velocidad de subida (solo en caso de salto)
     int px,py; //pantalla en la que esta el movil
+    uc_t jug : 1; //dice si es jugador
 } movil_t;
 
 // variables
@@ -56,6 +58,8 @@ extern castle_t castle;
 
 extern movil_t jugador;
 
+extern uc_t quit;
+
 // Funciones
 
 void graf_ini();
@@ -70,11 +74,20 @@ room_t* cst_get(uc_t c,uc_t r);
 void cst_ini();
 //inicia el mapa del castillo
 
-void cst_drw(uc_t c,uc_t r);
-//dibuja la habitacion con las coordenadas dadas
+void cst_fix_drw(uc_t c,uc_t r);
+//dibuja las paredes de la habitacion (solo cuando se entra en la habitacion)
+
+void cst_nfix_drw(uc_t c,uc_t r);
+//dibuja escaleras y decoracion de la habitacion
+
+void mov_pal(movil_t* m,palette_t pal);
+//paleta que usara el movil
 
 void mov_drw(movil_t m);
 //se dibuja un movil
+
+void mov_era(movil_t m);
+//se borra de la pantalla el movil
 
 int mov_mov(movil_t* m,char* dir);
 //se hace un movimiento en la direccion dir u: arriba, d: abajo, l: izquierda, r: derecha
@@ -82,3 +95,9 @@ int mov_mov(movil_t* m,char* dir);
 
 int mov_jmp(movil_t* m);
 //conectamos el salto
+
+void jug_ini();
+//definimos el jugador
+
+void jug_act();
+//control de movimiento del jugador
