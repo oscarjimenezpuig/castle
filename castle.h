@@ -17,6 +17,9 @@
 #define CASH 10
 #define CASDIM (CASW*CASH)
 
+#define NPX CASW //posiciones nulas de la pantalla de los moviles
+#define NPY CASH
+
 #define PJXI 0
 #define PJYI 5
 
@@ -34,12 +37,17 @@ typedef room_t castle_t[CASDIM];
 typedef struct {
     sprite_t spr; //sprite actual del movil
     palette_t pal; //paleta del sprite
-    uc_t pdi; //dimension del pixel
     int x,y; //posicion en la pantalla
     int hjm; //altura donde llegaba el salto
-    int vjy; //velocidad de subida (solo en caso de salto)
-    int px,py; //pantalla en la que esta el movil
-    uc_t jug : 1; //dice si es jugador
+    uc_t px,py; //pantalla en la que esta el movil
+    struct {
+        uc_t jmp : 1; //bandera que indica que salta
+        uc_t dwn : 1; //bandera que indica que baja
+        uc_t str : 1; //bandera que indica que esta en la escalera
+        uc_t act : 1; //dice si esta o no activo
+        uc_t jug : 1; //dice si es jugador
+        uc_t vue : 1; //dice si vuela
+    };
 } movil_t;
 
 // variables
@@ -80,8 +88,14 @@ void cst_fix_drw(uc_t c,uc_t r);
 void cst_nfix_drw(uc_t c,uc_t r);
 //dibuja escaleras y decoracion de la habitacion
 
-void mov_pal(movil_t* m,palette_t pal);
-//paleta que usara el movil
+movil_t mov_new(sprite_t s,palette_t p,int hjm,uc_t vue,uc_t jug);
+//se define un movil nuevo
+
+void mov_plc(movil_t* m,int x,int y,uc_t pcx,uc_t pcy);
+//se situa un movil en una posicion
+
+void mov_unact(movil_t* m);
+//se hace inactivo al movil
 
 void mov_drw(movil_t m);
 //se dibuja un movil
@@ -92,9 +106,6 @@ void mov_era(movil_t m);
 int mov_mov(movil_t* m,char* dir);
 //se hace un movimiento en la direccion dir u: arriba, d: abajo, l: izquierda, r: derecha
 //u,d no funcionaran en caso de salto
-
-int mov_jmp(movil_t* m);
-//conectamos el salto
 
 void jug_ini();
 //definimos el jugador

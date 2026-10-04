@@ -4,27 +4,33 @@ movil_t jugador;
 uc_t quit=0;
 
 void jug_ini() {
-    mov_pal(&jugador,pheroe);
-    jugador.spr=sheroe[0];
-    jugador.pdi=PIXDIM;
-    jugador.x=SPRD;
-    jugador.y=6*SPRD;
-    jugador.hjm=4*SPRD;
-    jugador.vjy=0;
-    jugador.px=PJXI;
-    jugador.py=PJYI;
-    jugador.jug=1;
+    jugador=mov_new(sheroe[0],pheroe,2*SPRD,0,1);
+    mov_plc(&jugador,SPRD,6*SPRD,PJXI,PJYI);
+}
+
+#include <stdio.h> //dbg
+
+static int in_stair(char key) {
+    int ret=0;
+    room_t* r=cst_get(jugador.px,jugador.py);
+    if(key=='k' && (r->sal & 1)) ret=-1;
+    else if(key=='i' && (r->sal & 8)) ret=1;
+    printf("%c %i=%i\n",key,r->sal,ret);//dbg
+    return ret;
 }
 
 void jug_act() {
+    const char* KEYS="ijkl";
     key_lis();
     char key[10];
-    char* pkey=key;
-    if(key_in('j')) *pkey++='l';
-    else if(key_in('l')) *pkey++='r';
-    *pkey='\0';
+    char* pks=key;
+    const char* pkl=KEYS;
+    while(*pkl!='\0') {
+        if(key_in(*pkl)) *pks++=*pkl;
+        pkl++;
+    }
+    *pks='\0';
     mov_mov(&jugador,key);
-    if(key_in('z')) mov_jmp(&jugador);
     if(key_in('q')) quit=1;
 }
 

@@ -43,6 +43,8 @@ int main() {
         mov_era(jugador);
         jug_act();
     }
+    prueba_mapa();
+    printf("%i,%i\n",jugador.px,jugador.py);//dbg
     castle_end();
     return 0;
 }
